@@ -1,0 +1,14 @@
+test_extracting_ids:
+  model: ror.ids
+  inputs:
+    ror.json_raw:
+      columns:
+        json: JSON
+      rows:
+        - json: '{"id":"https://ror.org/04aj4c181"}' # TIB
+        - json: '{"id":"https://ror.org/0304hq317"}' # LUH
+  outputs:
+    query:
+      rows:
+        - id: https://ror.org/04aj4c181
+        - id: https://ror.org/0304hq317

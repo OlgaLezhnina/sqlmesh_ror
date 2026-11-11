@@ -1,0 +1,37 @@
+services:
+  postgres:
+    image: postgres:18@sha256:8ff36f3c66371cba71d20ceedccfc3de9669a68737607888c4ef0af93abe8e39
+    shm_size: 128mb
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:5432:5432
+    networks:
+      database:
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}" ]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+    volumes:
+      - database:/var/lib/postgresql
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+  pgweb:
+    image: sosedoff/pgweb:0.17.0@sha256:a5256d416e2e8b92d69a4459058e3eca33a9f075d8325491644411d0bc3bd70b
+    restart: unless-stopped
+    ports:
+      - 8081:8081
+    environment:
+      PGWEB_DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable
+    networks:
+      database:
+    depends_on:
+      postgres:
+        condition: service_healthy
+volumes:
+  database:
+networks:
+  database:
+    driver: bridge
