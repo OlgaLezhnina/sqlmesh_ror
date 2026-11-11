@@ -12,8 +12,8 @@ wheels/
 # VSC settings
 .vscode/
 
-# Duckdb files
-*.duckdb
+# Duckdb
+data/
 
 # SQLMesh files
 .cache/
