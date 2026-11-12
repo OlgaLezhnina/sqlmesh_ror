@@ -1,16 +1,17 @@
 import json
-from sqlmesh import ExecutionContext, model
-from sqlglot import exp
+import pandas as pd
+from sqlmesh import model
 
-@model(    
-"ror.json_raw",   
-columns={       
-"json": "text",    
-},
+
+@model(
+    "ror.json_raw",
+     columns={       
+         "json": "jsonb",    
+     },
 )
 
-def execute(context, **kwargs):
+def execute(context, **kwargs) -> pd.DataFrame:
     with open('v2.15-2026-10-20-ror-data.json') as f:
         table = json.load(f)
-    select_query = exp.select("*").from_(table)
-    return context.fetchdf(select_query)
+    json_objs = list(map(lambda x: json.dumps(x), table))
+    return pd.DataFrame(data = {"json": json_objs}, columns = ["json"])
