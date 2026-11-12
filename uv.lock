@@ -511,6 +511,15 @@ wheels = [
 ]
 
 [[package]]
+name = "psycopg2"
+version = "2.9.13"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/91/81/6ea19b8b28feb9405c8c87a307776614d6e404bdb98467d1ce10a39d2c1d/psycopg2-2.9.13.tar.gz", hash = "sha256:d36784fc2dae69523ba4b79c7d1d1b4d6e83e87836874f111262f4db940b16a6", size = 378068, upload-time = "2026-09-09T23:56:21.749Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/4e/8a/820b2f5ec521db28b5f113d7d64b0264f775fef611265039ba0cb5101858/psycopg2-2.9.13-cp312-cp312-win_amd64.whl", hash = "sha256:10f7408b34412e8c0d4f8b1565541f1d651b1d00447857e5d8561b38f5c1a738", size = 2767613, upload-time = "2026-09-09T23:53:56.076Z" },
+]
+
+[[package]]
 name = "ptyprocess"
 version = "0.7.0"
 source = { registry = "https://pypi.org/simple" }
@@ -702,11 +711,11 @@ name = "ror-data"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
-    { name = "sqlmesh", extra = ["lsp"] },
+    { name = "sqlmesh", extra = ["lsp", "postgres"] },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "sqlmesh", extras = ["duckdb", "lsp"], specifier = "~=0.235.3" }]
+requires-dist = [{ name = "sqlmesh", extras = ["duckdb", "lsp", "postgres"], specifier = "~=0.235.3" }]
 
 [[package]]
 name = "ruamel-yaml"
@@ -774,6 +783,9 @@ lsp = [
     { name = "pygls" },
     { name = "sse-starlette" },
     { name = "watchfiles" },
+]
+postgres = [
+    { name = "psycopg2" },
 ]
 
 [[package]]

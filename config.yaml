@@ -1,12 +1,16 @@
 # --- Gateway Connection ---
 gateways:
-  duckdb:
+  postgres:
     connection:
       # For more information on configuring the connection to your execution engine, visit:
       # https://sqlmesh.readthedocs.io/en/stable/reference/configuration/#connection
       # https://sqlmesh.readthedocs.io/en/stable/integrations/engines/duckdb/#connection-options
-      type: duckdb
-      database: data/sqlmesh_state.db
+      type: postgres
+      database: postgres
+      user: postgres
+      password: postgres
+      host: 127.0.0.1
+      port: 5432
       # concurrent_tasks: 1
       # register_comments: True
       # pre_ping: False
@@ -20,13 +24,13 @@ gateways:
       # filesystems: 
       # token: 
 
-default_gateway: duckdb
+default_gateway: postgres
 
 # --- Model Defaults ---
 # https://sqlmesh.readthedocs.io/en/stable/reference/model_configuration/#model-defaults
 
 model_defaults:
-  dialect: duckdb
+  dialect: postgres
   start: 2026-05-25 # Start date for backfill history
   cron: '@daily'    # Run models daily at 12am UTC (can override per model)
 
