@@ -3,7 +3,7 @@ test_extracting_ids:
   inputs:
     ror.json_raw:
       columns:
-        json: JSON
+        json: jsonb
       rows:
         - json: '{"id":"https://ror.org/04aj4c181"}' # TIB
         - json: '{"id":"https://ror.org/0304hq317"}' # LUH
