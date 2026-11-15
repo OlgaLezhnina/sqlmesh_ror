@@ -11,7 +11,7 @@ from sqlmesh import model
 )
 
 def execute(context, **kwargs) -> pd.DataFrame:
-    with open('v2.15-2026-10-20-ror-data.json') as f:
-        table = json.load(f)
-    json_objs = list(map(lambda x: json.dumps(x), table))
+    with open('v2.15-2026-10-20-ror-data.json') as json_file:
+        records = json.load(json_file)
+    json_objs = list(map(json.dumps, records))
     return pd.DataFrame(data = {"json": json_objs}, columns = ["json"])
