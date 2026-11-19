@@ -1,0 +1,26 @@
+test_extracting_external_identifiers:
+  model: ror.external_ids
+  inputs:
+    ror.json_raw:
+      columns:
+        json: jsonb
+      rows:
+        - json: "{\"id\": \"https://ror.org/04aj4c181\", \"external_ids\": [{\"all\": \
+                [\"1111 2222 3333 4444\"], \"type\": \"isni\", \"preferred\": null}, \
+                {\"all\": [\"ABCDE\", \"VWXYZ\"], \"type\": \"wikidata\", \"preferred\": \
+                \"VWXYZ\"}]}"
+  outputs:
+    query:
+      rows:
+        - id: https://ror.org/04aj4c181
+          type: isni
+          preferred: false
+          external_id: "1111 2222 3333 4444"
+        - id: https://ror.org/04aj4c181
+          type: wikidata
+          preferred: false
+          external_id: ABCDE
+        - id: https://ror.org/04aj4c181
+          type: wikidata
+          preferred: true
+          external_id: VWXYZ
