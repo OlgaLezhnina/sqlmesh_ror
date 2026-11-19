@@ -1,0 +1,29 @@
+test_extracting_lookup_table_for_wikidata_identifiers:
+  model: ror.wikidata_lookup
+  inputs:
+    ror.external_ids:
+      columns:
+        id: text
+        type: text
+        preferred: bool
+        external_id: text
+      rows:
+        - id: https://ror.org/04aj4c181
+          type: wikidata
+          preferred: false
+          external_id: ABCDE
+        - id: https://ror.org/04aj4c181
+          type: wikidata
+          preferred: true
+          external_id: VWXYZ
+        - id: https://ror.org/04aj4c181
+          type: something-else
+          preferred: false
+          external_id: should-not-show-up
+  outputs:
+    query:
+      rows:
+        - ror: https://ror.org/04aj4c181
+          wikidata: ABCDE
+        - ror: https://ror.org/04aj4c181
+          wikidata: VWXYZ
